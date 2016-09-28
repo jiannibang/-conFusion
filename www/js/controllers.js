@@ -59,7 +59,7 @@ angular.module('conFusion.controllers', [])
         $scope.doReserve = function() {
             console.log('Doing reservation', $scope.reservation);
   
-            $setTimeout(function() {
+            $timeout(function() {
                 $scope.closeReserve();
             }, 1000);
         };
