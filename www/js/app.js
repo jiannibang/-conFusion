@@ -4,9 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.services'])
+angular.module('conFusion', ['ionic', 'ngCordova', 'conFusion.controllers','conFusion.services'])
 
-.run(function($ionicPlatform, $rootScope, $ionicLoading) {
+.run(function($ionicPlatform, $rootScope, $ionicLoading, $cordovaSplashscreen, $timeout) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -39,6 +39,11 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.service
       console.log('done');
         $rootScope.$broadcast('loading:hide');
     });   
+
+    $timeout(function(){
+        $cordovaSplashscreen.hide();
+     },20000); 
+
   });
 })
 
@@ -112,6 +117,9 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.service
         resolve: {
           dishes: ['menuFactory',function(menuFactory){
             return menuFactory.query();
+          }],
+          favorites: ['favoriteFactory', function(favoriteFactory){
+            return favoriteFactory.getFavorites();
           }]
         }
       }

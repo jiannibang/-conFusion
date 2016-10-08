@@ -2,7 +2,7 @@
 
 angular.module('conFusion.services', ['ngResource'])
 
-    .constant("baseURL","http://localhost:3000/")
+    .constant("baseURL","http://192.168.20.120:3000/")
 
     .factory('menuFactory', ['$resource', 'baseURL', function($resource,baseURL) {
         return $resource(baseURL + "dishes/:id", null, {
@@ -62,8 +62,14 @@ angular.module('conFusion.services', ['ngResource'])
             storeObject: function(key, value) {
                 $window.localStorage[key] = JSON.stringify(value);
             },
-            getObject: function(key,defaultValue) {
-                return JSON.parse($window.localStorage[key] || defaultValue);
+            getObject: function(key, defaultValue) {
+        //        if( typeof($window.localStorage[key]) == undefined){
+        //            return JSON.parse('');
+        //        }else {
+               
+                    return JSON.parse($window.localStorage[key] || defaultValue);
+        //        }
+                
             }
         }
     }])
